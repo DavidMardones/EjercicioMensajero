@@ -53,7 +53,11 @@ namespace EjercicioMensajero
 
         static void Mostrar()
         {
-
+            List<Mensaje> mensajes = mensajesDAL.ObtenerMensajes();
+            foreach(Mensaje mensaje in mensajes)
+            {
+                Console.WriteLine(mensaje);
+            }
         }
     }
 }
