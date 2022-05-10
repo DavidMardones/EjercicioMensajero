@@ -48,12 +48,19 @@ namespace EjercicioMensajero
                 Texto = texto,
                 Tipo = "Aplicacion",
             };
-            mensajesDAL.AgregarMensaje(mensaje);
+            lock (mensajesDAL)
+            {
+                mensajesDAL.AgregarMensaje(mensaje);
+            }
         }
 
         static void Mostrar()
         {
-            List<Mensaje> mensajes = mensajesDAL.ObtenerMensajes();
+            List<Mensaje> mensajes = null;
+            lock (mensajesDAL)
+            {
+                mensajes = mensajesDAL.ObtenerMensajes();
+            }
             foreach(Mensaje mensaje in mensajes)
             {
                 Console.WriteLine(mensaje);
